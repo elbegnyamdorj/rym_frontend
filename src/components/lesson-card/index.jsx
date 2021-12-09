@@ -8,14 +8,16 @@ class LessonCard extends Component {
 
   render() {
     return (
-      <div class="card text-center shadow p-3 mb-5 bg-light rounded-4 border-0 card-style">
-        <div class="card-body">
-          <i class="fas fa-plus"></i>
-          <h1>+</h1>
-          <p class="card-text">Хичээл Нэмэх</p>
-          <a href="#" class="stretched-link"></a>
-        </div>
-      </div>
+      <div class="card text-right shadow p-3 mb-5 bg-light rounded-3 border-0 card-style">
+              <div class="card-body">
+
+                <h4 class="card-title">{this.props.lesson_name} - {this.props.group_number}</h4>
+                <p class="card-text">Date</p>
+                <a href="teachSub.html" class=" stretched-link"> </a>
+
+              </div>
+              </div>
+
     );
   }
 }

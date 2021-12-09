@@ -3,7 +3,8 @@ import React, { Component} from "react";
 import Login from './components/login';
 import Signup from './components/signup';
 import Hello from './components/Hello';
-import TeacherHome from './components/teacher-home';
+import BaseHome from './components/teacher-home';
+import CardList from './components/lesson-card-list';
 // import { Routes, Route, Link, Router } from "react-router-dom";
 import {
   BrowserRouter as Router,
@@ -14,12 +15,12 @@ import {
 function App() {
   return (
     <div className="site">
-      <main>
+      <main  className='h-100'>
           <Routes>
               <Route exact path={"/login"} element={<Login />}/>
               <Route exact path={"/signup"} element={<Signup />}/>
               <Route exact path={"/hello"} element={<Hello />}/>
-              <Route exact path={'/home'} element={<TeacherHome />}/>
+              <Route exact path={'/home'} element={<BaseHome children={CardList}/>}/>
               {/* <Route path={"/"} render={() => <div>Home again</div>}/> */}
           </Routes>
       </main>

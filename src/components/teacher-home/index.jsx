@@ -2,11 +2,11 @@ import React, { Component } from "react";
 import Navbar from "../navbar";
 import axiosInstance from "../axiosApi";
 import "./teacher-home-style.css";
-import LessonCard from "../lesson-card";
+import CardList from "../lesson-card-list";
 class TeacherHome extends Component {
   constructor(props) {
     super(props);
-    this.state = { email: "", password: "" };
+    this.state = { group_number: "", lesson_name: "" };
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -38,23 +38,20 @@ class TeacherHome extends Component {
   }
 
   render() {
+    const group_list=[{lesson_name:'SWE221',group_number:213},{lesson_name:'SWE221',group_number:213}]
     return (
-      <div>
+      <>
         <Navbar />
-        <div class="container">
-          <div class="row justify-content-center">
-            <div class="col-1"></div>
-            <div class="col-10 bg-light px-5">
-              <h4 class=" my-5 pb-1 border-bottom">ХИЧЭЭЛҮҮД</h4>
-
-              <div class="card-list">
-                <LessonCard />
-              </div>
+        <div className="container">
+          <div className="row justify-content-center">
+            <div className="col-1"></div>
+            <div className="col-10 bg-light mh-100 px-5">
+              <CardList group_list={group_list}/>
             </div>
-            <div class="col-1"></div>
+            <div className="col-1"></div>
           </div>
         </div>
-      </div>
+      </>
     );
   }
 }
