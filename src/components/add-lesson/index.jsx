@@ -1,12 +1,11 @@
 import React, { Component } from "react";
 import Navbar from "../navbar";
 import axiosInstance from "../axiosApi";
-import "./teacher-home-style.css";
-import CardList from "../lesson-card-list";
-class TeacherHome extends Component {
+import "./add-lesson-style.css";
+
+class AddLesson extends Component {
   constructor(props) {
     super(props);
-    this.state = { group_number: "", lesson_name: "" };
 
   }
 
@@ -19,7 +18,22 @@ class TeacherHome extends Component {
           <div className="row justify-content-center">
             <div className="col-1"></div>
             <div className="col-10 bg-light mh-100 px-5">
-              <CardList group_list={group_list}/>
+            <input
+              type="text"
+              placeholder="email@ufe.edu.mn"
+              name="email"
+              required
+            //   value={this.state.email}
+            //   onChange={this.handleChange}
+            />
+            <input
+              type="password"
+              placeholder="нууц үг"
+              name="password"
+              required
+            //   value={this.state.password}
+            //   onChange={this.handleChange}
+            />
             </div>
             <div className="col-1"></div>
           </div>
@@ -28,4 +42,4 @@ class TeacherHome extends Component {
     );
   }
 }
-export default TeacherHome;
+export default AddLesson;
