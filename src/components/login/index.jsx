@@ -47,6 +47,7 @@ class Login extends Component {
               placeholder="email@ufe.edu.mn"
               name="email"
               required
+              className="login-inputs"
               value={this.state.email}
               onChange={this.handleChange}
             />
@@ -54,6 +55,7 @@ class Login extends Component {
               type="password"
               placeholder="нууц үг"
               name="password"
+              className="login-inputs"
               required
               value={this.state.password}
               onChange={this.handleChange}

@@ -18,8 +18,7 @@ li a {
   text-decoration: none;
 }
 
-input[type="text"],
-input[type="password"] {
+.login-inputs {
   width: 420px;
   padding: 20px;
   margin: 8px 0;

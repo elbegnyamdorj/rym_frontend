@@ -1,45 +1,63 @@
 import React, { Component } from "react";
 import Navbar from "../navbar";
-import axiosInstance from "../axiosApi";
-import "./add-lesson-style.css";
-
-class AddLesson extends Component {
+export class CreateLesson extends Component {
   constructor(props) {
     super(props);
-
   }
 
   render() {
-    const group_list=[{lesson_name:'SWE221',group_number:213},{lesson_name:'SWE221',group_number:213}]
     return (
       <>
         <Navbar />
-        <div className="container">
-          <div className="row justify-content-center">
-            <div className="col-1"></div>
-            <div className="col-10 bg-light mh-100 px-5">
-            <input
-              type="text"
-              placeholder="email@ufe.edu.mn"
-              name="email"
-              required
-            //   value={this.state.email}
-            //   onChange={this.handleChange}
-            />
-            <input
-              type="password"
-              placeholder="нууц үг"
-              name="password"
-              required
-            //   value={this.state.password}
-            //   onChange={this.handleChange}
-            />
+        <div class="container">
+          <div class="row justify-content-center">
+            <div class="col-1"></div>
+            <div class="col-10 bg-light px-5 h-100">
+              <h4 class="border-bottom my-5 pb-1">ХИЧЭЭЛ НЭМЭХ</h4>
+              <div class="container">
+                <div class="row">
+                  <div class="col-sm-6 text-left">
+                    <textarea
+                      class="form-control mb-5"
+                      aria-label="With textarea"
+                      placeholder="student@ufe.edu.mn , .."
+                      style={{ height: "300px" }}
+                    ></textarea>
+                  </div>
+                  <div class="col-sm-6 d-flex align-items-center flex-column">
+                    <input
+                      type="text"
+                      class="form-control mb-5"
+                      id="lesson_name"
+                      placeholder="Хичээлийн нэр оруулна уу"
+                    />
+
+                    <a
+                      class="btn btn-dark mt-5"
+                      href="teachSub.html"
+                      role="button"
+                      style={{ width: "150px" }}
+                    >
+                      ХИЧЭЭЛ НЭЭХ
+                    </a>
+                    <a
+                      class="btn btn-outline-dark mt-2"
+                      href="teachHome.html"
+                      role="button"
+                      style={{ width: "150px" }}
+                    >
+                      ЦУЦЛАХ
+                    </a>
+                  </div>
+                </div>
+              </div>
             </div>
-            <div className="col-1"></div>
+            <div class="col-1"></div>
           </div>
         </div>
       </>
     );
   }
 }
-export default AddLesson;
+
+export default CreateLesson;

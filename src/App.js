@@ -3,9 +3,11 @@ import React, { Component} from "react";
 import Login from './components/login';
 import Signup from './components/signup';
 import Hello from './components/Hello';
-import TeacherHome from './components/teacher-home';
-import AddLesson from './components/add-lesson';
-
+import BaseHome from './components/teacher-home';
+import CardList from './components/lesson-card-list';
+import CreateLesson from './components/add-lesson';
+import CreateSubgroup from './components/add-subgroup';
+// import { Routes, Route, Link, Router } from "react-router-dom";
 import {
   BrowserRouter as Router,
   Route,
@@ -20,8 +22,9 @@ function App() {
               <Route exact path={"/login"} element={<Login />}/>
               <Route exact path={"/signup"} element={<Signup />}/>
               <Route exact path={"/hello"} element={<Hello />}/>
-              <Route exact path={'/home'} element={<TeacherHome />}/>
-              <Route exact path={'/addlesson'} element={<AddLesson />}/>
+              <Route exact path={'/home'} element={<BaseHome children={CardList}/>}/>
+              <Route exact path={'/create-lesson'} element={<CreateLesson />}/>
+              <Route exact path={'/create-subgroup'} element={<CreateSubgroup />}/>
               {/* <Route path={"/"} render={() => <div>Home again</div>}/> */}
           </Routes>
       </main>
