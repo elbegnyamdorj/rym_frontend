@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Navbar from "../navbar";
 import Button from "react-bootstrap/Button";
+import SubgroupElement from "../subgroup-element";
 export class SubgroupList extends Component {
   constructor(props) {
     super(props);
@@ -17,6 +18,7 @@ export class SubgroupList extends Component {
               <Button className="btn btn-outline-dark btn-lg py-2 mt-4 btn-light btn-block w-100">
                 +
               </Button>
+              <SubgroupElement subgroup_name="sda" />
             </div>
             <div className="col-1"></div>
           </div>
