@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import axiosInstance from "../axiosApi";
 import "./login-style.css";
-
+import jwt from "jwt-decode";
 class Login extends Component {
   constructor(props) {
     super(props);
@@ -26,8 +26,12 @@ class Login extends Component {
         .then((response) => {
           axiosInstance.defaults.headers["Authorization"] =
             "JWT " + response.data.access;
+          const token = jwt(response.data.access);
           localStorage.setItem("access_token", response.data.access);
           localStorage.setItem("refresh_token", response.data.refresh);
+          localStorage.setItem("user_id", token.user_id);
+          localStorage.setItem("user_type_id", token.user_type_id_id);
+
           return response.data;
         });
     } catch (error) {

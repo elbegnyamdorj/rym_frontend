@@ -8,7 +8,7 @@ export class SubgroupElement extends Component {
   }
   render() {
     return (
-      <Link to="/login" state={{ group_id: this.props.group_id }}>
+      <Link to="/" state={{ group_id: this.props.group_id }}>
         <Button className="btn btn-outline-dark btn-lg py-2 mt-4 btn-light btn-block w-100">
           {this.props.subgroup_name}
         </Button>

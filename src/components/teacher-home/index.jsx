@@ -1,17 +1,28 @@
 import React, { Component } from "react";
 import Navbar from "../navbar";
-import axiosInstance from "../axiosApi";
+import axios from "axios";
+import { MAIN_URL } from "../../urls";
 import "./teacher-home-style.css";
 import CardList from "../lesson-card-list";
 class TeacherHome extends Component {
   constructor(props) {
     super(props);
-    this.state = { group_number: "", lesson_name: "" };
-
+    this.state = { group_list: [] };
+  }
+  componentDidMount() {
+    axios
+      .get(`${MAIN_URL}/group/`, {
+        params: {
+          teacher_id: localStorage.getItem("user_id"),
+        },
+      })
+      .then((res) => {
+        const data = res.data;
+        this.setState({ group_list: data });
+      });
   }
 
   render() {
-    const group_list=[{lesson_name:'SWE221',group_number:213},{lesson_name:'SWE221',group_number:213}]
     return (
       <>
         <Navbar />
@@ -19,7 +30,7 @@ class TeacherHome extends Component {
           <div className="row justify-content-center">
             <div className="col-1"></div>
             <div className="col-10 bg-light mh-100 px-5">
-              <CardList group_list={group_list}/>
+              <CardList group_list={this.state.group_list} />
             </div>
             <div className="col-1"></div>
           </div>

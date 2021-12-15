@@ -1,13 +1,9 @@
 import React, { Component } from "react";
-
+import { Link } from "react-router-dom";
 import LessonCard from "../lesson-card";
 // import "./lesson-card-list-style.css";
 
 class CardList extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     return (
       <div>
@@ -18,16 +14,18 @@ class CardList extends Component {
               <i className="fas fa-plus"></i>
               <h1>+</h1>
               <p className="card-text">Хичээл Нэмэх</p>
-              <a href="#" class="stretched-link"></a>
+              <Link className="stretched-link" to="/lesson/create"></Link>
             </div>
           </div>
-          {this.props.group_list.map(el => (
-              <LessonCard
+          {this.props.group_list.map((el) => (
+            <LessonCard
+              key={el.id}
+              created_at={el.created_at}
+              group_id={el.id}
               lesson_name={el.lesson_name}
               group_number={el.group_number}
             />
           ))}
-          
         </div>
       </div>
     );

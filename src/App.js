@@ -1,5 +1,5 @@
 import './App.css';
-import React, { Component} from "react";
+import React from "react";
 import Login from './components/login';
 import Signup from './components/signup';
 import Hello from './components/Hello';
@@ -8,12 +8,10 @@ import CardList from './components/lesson-card-list';
 import CreateLesson from './components/add-lesson';
 import CreateSubgroup from './components/add-subgroup';
 import SubgroupList from './components/subgroup-list';
-// import { Routes, Route, Link, Router } from "react-router-dom";
+import TeamList from './components/team-list';
 import {
-  BrowserRouter as Router,
   Route,
   Routes,
-  Link
 } from 'react-router-dom';
 function App() {
   return (
@@ -27,6 +25,7 @@ function App() {
               <Route exact path={'/lesson/create'} element={<CreateLesson />}/>
               <Route exact path={'/lesson/subgroups/create'} element={<CreateSubgroup />}/>
               <Route exact path={'/lesson/subgroups'} element={<SubgroupList />}/>
+              <Route exact path={'/lesson/subgroups/teams'} element={<TeamList />}/>
               {/* <Route path={"/"} render={() => <div>Home again</div>}/> */}
           </Routes>
       </main>
