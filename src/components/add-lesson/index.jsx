@@ -20,7 +20,14 @@ const CreateLesson = (props) => {
       .then((res) => {
         const data = res.data;
         alert("Amjilttai");
-        history("/lesson/subgroups", { state: { group_id: data.id } });
+        history("/lesson/subgroups", {
+          state: {
+            group_id: data.id,
+            isTeacher: true,
+            lesson_name: lesson_name,
+            group_number: group_number,
+          },
+        });
       });
   };
 

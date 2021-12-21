@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import axiosInstance from "../axiosApi";
+import { Link, useNavigate } from "react-router-dom";
 import "./login-style.css";
 import jwt from "jwt-decode";
 class Login extends Component {
@@ -24,15 +25,25 @@ class Login extends Component {
           password: this.state.password,
         })
         .then((response) => {
-          axiosInstance.defaults.headers["Authorization"] =
-            "JWT " + response.data.access;
-          const token = jwt(response.data.access);
-          localStorage.setItem("access_token", response.data.access);
-          localStorage.setItem("refresh_token", response.data.refresh);
-          localStorage.setItem("user_id", token.user_id);
-          localStorage.setItem("user_type_id", token.user_type_id_id);
+          if (response) {
+            axiosInstance.defaults.headers["Authorization"] =
+              "JWT " + response.data.access;
+            const token = jwt(response.data.access);
+            localStorage.setItem("access_token", response.data.access);
+            localStorage.setItem("refresh_token", response.data.refresh);
+            localStorage.setItem("user_id", token.user_id);
+            localStorage.setItem("user_type_id", token.user_type_id_id);
+            console.log(token.user_type_id_id);
+            if (token.user_type_id_id === 1) {
+              window.location.href = "/lesson";
+            } else {
+              window.location.href = "/home";
+            }
 
-          return response.data;
+            return response.data;
+          } else {
+            console.log("aldaa");
+          }
         });
     } catch (error) {
       console.log("error");
@@ -64,18 +75,16 @@ class Login extends Component {
               value={this.state.password}
               onChange={this.handleChange}
             />
-            <label>
-              <input type="checkbox" name="remember" label="namaig sana" />
-            </label>
-            <button type="submit" value="Submit">
+
+            <button type="submit" value="Submit" className="btn btn-dark">
               Нэвтрэх
             </button>
             <span className="psw">
               <a href="#">Forgot password?</a>
             </span>
-            {/* <button type="button" href="#" className="signupbtn">
+            <Link to="/signup" className="btn btn-light signupbtn ">
               Бүртгүүлэх
-            </button> */}
+            </Link>
           </div>
         </form>
       </div>

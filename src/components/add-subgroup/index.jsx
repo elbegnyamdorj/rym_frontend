@@ -1,15 +1,19 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import Navbar from "../navbar";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { MAIN_URL } from "../../urls";
+
 const CreateSubgroup = () => {
   const location = useLocation();
   const [sub_group_name, setSubgroupName] = useState("");
+  const [subgroup_id, setSubgroupId] = useState();
   const [num_of_groups, setNumOfGroups] = useState(0);
   const [group_id] = useState(location.state.group_id);
+  const [lesson_name] = useState(location.state.lesson_name);
 
+  const history = useNavigate();
   console.log(typeof group_id);
   const createSubGroup = () => {
     axios
@@ -18,8 +22,18 @@ const CreateSubgroup = () => {
         group_id: group_id,
       })
       .then((res) => {
-        alert("Success");
         const data = res.data;
+        setSubgroupId(data.id);
+
+        history("/lesson/subgroups/create-team", {
+          state: {
+            subgroup_name: sub_group_name,
+            num_of_groups: num_of_groups,
+            group_id: group_id,
+            subgroup_id: data.id,
+            lesson_name: lesson_name,
+          },
+        });
       });
   };
 
@@ -30,7 +44,7 @@ const CreateSubgroup = () => {
         <div className="row justify-content-center">
           <div className="col-1"></div>
           <div className="col-10 bg-light px-5 h-100">
-            <h4 className="border-bottom my-5 pb-1">Хичээлийн нэр</h4>
+            <h4 className="border-bottom my-5 pb-1">{lesson_name}</h4>
             <div className="container">
               <div className="d-flex align-items-center flex-column">
                 <input
@@ -60,23 +74,20 @@ const CreateSubgroup = () => {
                   <Link
                     to="/lesson"
                     className="btn btn-outline-dark m-5"
-                    href="teachSub.html"
                     role="button"
                     style={{ width: "150px" }}
                   >
                     ЦУЦЛАХ
                   </Link>
-                  <Link
-                    to="/lesson/subgroups/teams"
+                  <div
+                    to="/lesson/subgroups/create-team"
                     onClick={createSubGroup}
-                    state={{ subgroup_name: sub_group_name }}
                     className="btn btn-dark m-5"
-                    href="teachSub.html"
                     role="button"
                     style={{ width: "150px" }}
                   >
                     СЭДЭВ НЭЭХ
-                  </Link>
+                  </div>
                 </div>
               </div>
               <div className="col-1"></div>

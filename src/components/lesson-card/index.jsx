@@ -14,7 +14,12 @@ class LessonCard extends Component {
           <Link
             className="stretched-link"
             to="/lesson/subgroups"
-            state={{ group_id: this.props.group_id }}
+            state={{
+              group_id: this.props.group_id,
+              isTeacher: this.props.isTeacher,
+              group_number: this.props.group_number,
+              lesson_name: this.props.lesson_name,
+            }}
           ></Link>
         </div>
       </div>

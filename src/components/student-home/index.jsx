@@ -2,18 +2,17 @@ import React, { Component } from "react";
 import Navbar from "../navbar";
 import axios from "axios";
 import { MAIN_URL } from "../../urls";
-import "./teacher-home-style.css";
 import CardList from "../lesson-card-list";
-class TeacherHome extends Component {
+class StudentHome extends Component {
   constructor(props) {
     super(props);
     this.state = { group_list: [] };
   }
   componentDidMount() {
     axios
-      .get(`${MAIN_URL}/group/`, {
+      .get(`${MAIN_URL}/home/`, {
         params: {
-          teacher_id: localStorage.getItem("user_id"),
+          student_id: localStorage.getItem("user_id"),
         },
       })
       .then((res) => {
@@ -30,7 +29,7 @@ class TeacherHome extends Component {
           <div className="row justify-content-center">
             <div className="col-1"></div>
             <div className="col-10 bg-light mh-100 px-5">
-              <CardList group_list={this.state.group_list} isTeacher={true} />
+              <CardList group_list={this.state.group_list} isTeacher={false} />
             </div>
             <div className="col-1"></div>
           </div>
@@ -39,4 +38,4 @@ class TeacherHome extends Component {
     );
   }
 }
-export default TeacherHome;
+export default StudentHome;

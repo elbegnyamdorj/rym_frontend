@@ -1,42 +1,40 @@
 import React, { Component } from "react";
-
+import Select from "react-select";
 export class TeamElement extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      team_name: this.props.dugaar + "-р баг",
+      selected: [],
+      data: [],
+    };
+  }
+  componentDidMount() {
+    this.setState({ data: this.props.data });
   }
 
+  handleChange = (selected) => {
+    this.setState({ selected: selected });
+    let data = { id: this.props.dugaar, selected: selected };
+    this.props.onSelected(data);
+  };
+
   render() {
+    let options = [];
+    this.props.data.map((el) =>
+      options.push({ value: el.id, label: el.first_name + " " + el.email })
+    );
     return (
       <div>
-        <h4 className="border-bottom my-5 pb-1">1-Р БАГ</h4>
-        <select id="inputState" className="form-control">
-          <option selected>Оюутан нэмэх...</option>
-          <option>...</option>
-          <option>...</option>
-        </select>
-
-        <table className="table">
-          <thead>
-            <tr>
-              <th scope="col">#</th>
-              <th scope="col">Оюутны нэр</th>
-              <th scope="col">Оюутны код</th>
-              <th scope="col"></th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <th scope="row">1</th>
-              <td> first_name </td>
-              <td> student_id </td>
-              <td>
-                <button type="button" className="btn btn-sm">
-                  хасах
-                </button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+        <h4 className="border-bottom my-5 pb-1">{this.state.team_name}</h4>
+        <Select
+          isMulti
+          onChange={this.handleChange}
+          name="colors"
+          options={options}
+          className="basic-multi-select"
+          classNamePrefix="select"
+        />
       </div>
     );
   }
