@@ -49,8 +49,7 @@ const TeacherTeamView = (props) => {
                   <div className="col-sm-4 text-left">
                     <Link
                       to="/lesson/subgroups/teams/score"
-                      className="btn btn-dark "
-                      href="teachSubTeam.html"
+                      className="btn btn-primary "
                       role="button"
                       state={{
                         group_id: group_id,

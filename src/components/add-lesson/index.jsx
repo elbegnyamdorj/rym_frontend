@@ -69,7 +69,7 @@ const CreateLesson = (props) => {
                     onChange={(e) => setGroup_number(e.target.value)}
                   />
                   <Button
-                    className="btn btn-dark mt-5"
+                    className="btn btn-primary mt-5"
                     onClick={() => handleSubmit()}
                     role="button"
                     style={{ width: "150px" }}

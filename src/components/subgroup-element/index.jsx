@@ -18,7 +18,7 @@ export class SubgroupElement extends Component {
           subgroup_name: this.props.subgroup_name,
         }}
       >
-        <Button className="btn btn-outline-dark btn-lg py-2 mt-4 btn-light btn-block w-100">
+        <Button className="btn btn-outline-link btn-lg py-2 mt-4 btn-light btn-block w-100">
           {this.props.subgroup_name}
         </Button>
       </Link>

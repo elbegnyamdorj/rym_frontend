@@ -29,7 +29,12 @@ class StudentHome extends Component {
           <div className="row justify-content-center">
             <div className="col-1"></div>
             <div className="col-10 bg-light mh-100 px-5">
-              <CardList group_list={this.state.group_list} isTeacher={false} />
+              {this.state.group_list && (
+                <CardList
+                  group_list={this.state.group_list}
+                  isTeacher={false}
+                />
+              )}
             </div>
             <div className="col-1"></div>
           </div>

@@ -51,7 +51,7 @@ const CreateSubgroup = () => {
                   type="text"
                   className="form-control mb-5"
                   id="sub_group_name"
-                  placeholder="Сэдвийн нэр оруулна уу"
+                  placeholder="Багын ажлийн нэр оруулна уу"
                   value={sub_group_name}
                   onChange={(e) => setSubgroupName(e.target.value)}
                 />
@@ -82,11 +82,11 @@ const CreateSubgroup = () => {
                   <div
                     to="/lesson/subgroups/create-team"
                     onClick={createSubGroup}
-                    className="btn btn-dark m-5"
+                    className="btn btn-primary m-5"
                     role="button"
                     style={{ width: "150px" }}
                   >
-                    СЭДЭВ НЭЭХ
+                    НЭЭХ
                   </div>
                 </div>
               </div>

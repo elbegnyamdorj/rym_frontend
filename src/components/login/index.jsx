@@ -57,6 +57,13 @@ class Login extends Component {
       <div>
         <form onSubmit={this.handleSubmit}>
           <div className="containers">
+            <div>
+              <img
+                src={"./ufelogo.png"}
+                class="img-fluid float-left"
+                width="80"
+              />
+            </div>
             <div className="garchig">НЭВТРЭХ</div>
             <input
               type="text"
@@ -76,16 +83,15 @@ class Login extends Component {
               value={this.state.password}
               onChange={this.handleChange}
             />
-            {this.state.message && (
-              <Alert className="custom-alert" variant={"danger"}>
-                {this.state.message}
-              </Alert>
-            )}
-            <button type="submit" value="Submit" className="btn btn-dark">
-              Нэвтрэх
+            <label>
+              <input type="checkbox" name="remember" label="namaig sana" />{" "}
+              Remember Me
+            </label>
+            <button class="btnlogin" type="submit" value="Submit">
+              НЭВТРЭХ
             </button>
             <span className="psw">
-              <a href="#">Forgot password?</a>
+              <a href="#">Forgot Password?</a>
             </span>
             <Link to="/signup" className="btn btn-light signupbtn ">
               Бүртгүүлэх

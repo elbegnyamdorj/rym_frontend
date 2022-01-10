@@ -12,8 +12,8 @@ const StudentTeam = () => {
   const [teammember_list, setTeamMember] = useState([]);
   const [rating_criteria, setRC] = useState([]);
   const [value, setValue] = useState();
-  const [goodComm, setGood] = useState();
-  const [badComm, setBad] = useState();
+  const [goodComm, setGood] = useState("");
+  const [badComm, setBad] = useState("");
   const [post_list, setPost_list] = useState([]);
   const [group_number] = useState(location.state.group_number);
   const [lesson_name] = useState(location.state.lesson_name);
@@ -225,6 +225,7 @@ const StudentTeam = () => {
                           зохих ур чадвар, зан чанар
                         </label>
                         <textarea
+                          required={true}
                           onChange={(e) => setBad(e.target.value)}
                           className="form-control"
                           id="comment2"

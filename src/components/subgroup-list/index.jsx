@@ -40,7 +40,7 @@ const SubgroupList = (props) => {
             <div className="col-10 bg-light px-5 ">
               <h4 className="border-bottom my-5 pb-1">
                 {" "}
-                {lesson_name} - {group_number} / СЭДВҮҮД
+                {lesson_name} - {group_number} / БАГИЙН АЖЛУУД
               </h4>
               <Link
                 className="btn btn-outline-dark btn-lg py-2 mt-4 btn-light btn-block w-100"
@@ -92,7 +92,7 @@ const SubgroupList = (props) => {
                   }}
                   {...console.log(el)}
                 >
-                  <Button className="btn btn-outline-dark btn-lg py-2 mt-4 btn-light btn-block w-100">
+                  <Button className="btn btn-outline-link btn-lg py-2 mt-4 btn-light btn-block w-100">
                     {el.subgroup_name}
                   </Button>
                 </Link>

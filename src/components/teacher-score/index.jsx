@@ -41,7 +41,7 @@ const TeacherScoreView = () => {
               {" "}
               {lesson_name} - {group_number}{" "}
             </h4>
-            <table className="table table-dark">
+            <table className="table table-striped">
               <thead>
                 <tr>
                   <th scope="col">#</th>

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import "./navbar-style.css";
+import logo2 from "./logo2.png";
 import axiosInstance from "../axiosApi";
 class Navbar extends Component {
   constructor() {
@@ -29,19 +30,19 @@ class Navbar extends Component {
 
   render() {
     return (
-      <nav className="navbar navbar-dark bg-dark justify-content-between px-5 py-3">
+      <nav class="navbar justify-content-between px-5 py-3">
         <Link
           className="navbar-brand"
           to={
             localStorage.getItem("user_type_id") === "1" ? "/lesson" : "/home"
           }
         >
-          Rate Your Mate
+          <img src={logo2} class="img-fluid float-left" width="100" />
         </Link>
 
         <div className="dropdown">
           <button
-            className="btn btn-secondary dropdown-toggle"
+            className="btn btn-primary dropdown-toggle w-100 "
             type="button"
             id="dropdownMenu2"
             data-toggle="dropdown"
@@ -54,9 +55,6 @@ class Navbar extends Component {
             className="dropdown-menu dropdown-menu-right"
             aria-labelledby="dropdownMenu2"
           >
-            {/* <a className="dropdown-item disabled" type="text">
-              asdas
-            </a> */}
             <button className="dropdown-item" onClick={this.handleLogout}>
               Гарах
             </button>
