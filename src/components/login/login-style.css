@@ -33,6 +33,14 @@ li a {
   color: white;
   padding: 14px 18px;
   margin: 15px 0;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+button {
+  background-color: #091327;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
   border: none;
   cursor: pointer;
   width: 250px;

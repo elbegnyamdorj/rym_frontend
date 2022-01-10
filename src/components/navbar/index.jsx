@@ -1,49 +1,63 @@
 import React, { Component } from "react";
-import axiosInstance from "../axiosApi";
+import { Link } from "react-router-dom";
 import "./navbar-style.css";
-
+import logo2 from "./logo2.png";
+import axiosInstance from "../axiosApi";
 class Navbar extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { email: "", password: "" };
-
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+  constructor() {
+    super();
+    this.handleLogout = this.handleLogout.bind(this);
   }
 
-  handleChange(event) {
-    this.setState({ [event.target.name]: event.target.value });
-  }
-
-  handleSubmit(event) {
+  handleLogout(event) {
     event.preventDefault();
+    try {
+      const response = axiosInstance
+        .post("/blacklist/", {
+          refresh_token: localStorage.getItem("refresh_token"),
+        })
+        .then((response) => {
+          localStorage.removeItem("access_token");
+          localStorage.removeItem("refresh_token");
+          axiosInstance.defaults.headers["Authorization"] = null;
+          window.location.href = "/login";
+          return response;
+        });
+    } catch (e) {
+      console.log(e);
+    }
   }
 
   render() {
     return (
       <nav class="navbar justify-content-between px-5 py-3">
-        <a class="navbar-brand" href="teachHome.html">
-        <img src={"./logo2.png"} class="img-fluid float-left" width="100"/>
-        </a>
+        <Link
+          className="navbar-brand"
+          to={
+            localStorage.getItem("user_type_id") === "1" ? "/lesson" : "/home"
+          }
+        >
+          <img src={logo2} class="img-fluid float-left" width="100" />
+        </Link>
 
-        <div class="dropdown">
+        <div className="dropdown">
           <button
-            class="btn btn-outline-light"
+            className="btn btn-primary dropdown-toggle w-100 "
             type="button"
             id="dropdownMenu2"
+            data-toggle="dropdown"
             aria-haspopup="true"
-            aria-expanded="false">
+            aria-expanded="false"
+          >
+            <i className="fas fa-user"></i>
           </button>
           <div
-            class="dropdown-menu dropdown-menu-right"
+            className="dropdown-menu dropdown-menu-right"
             aria-labelledby="dropdownMenu2"
           >
-            <a class="dropdown-item disabled" type="text">
-              asdas
-            </a>
-            <a class="dropdown-item" type="button" href="rym.html">
+            <button className="dropdown-item" onClick={this.handleLogout}>
               Гарах
-            </a>
+            </button>
           </div>
         </div>
       </nav>

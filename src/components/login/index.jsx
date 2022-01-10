@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import axiosInstance from "../axiosApi";
+import { Link, useNavigate } from "react-router-dom";
 import "./login-style.css";
-
+import jwt from "jwt-decode";
 class Login extends Component {
   constructor(props) {
     super(props);
@@ -24,11 +25,25 @@ class Login extends Component {
           password: this.state.password,
         })
         .then((response) => {
-          axiosInstance.defaults.headers["Authorization"] =
-            "JWT " + response.data.access;
-          localStorage.setItem("access_token", response.data.access);
-          localStorage.setItem("refresh_token", response.data.refresh);
-          return response.data;
+          if (response) {
+            axiosInstance.defaults.headers["Authorization"] =
+              "JWT " + response.data.access;
+            const token = jwt(response.data.access);
+            localStorage.setItem("access_token", response.data.access);
+            localStorage.setItem("refresh_token", response.data.refresh);
+            localStorage.setItem("user_id", token.user_id);
+            localStorage.setItem("user_type_id", token.user_type_id_id);
+            console.log(token.user_type_id_id);
+            if (token.user_type_id_id === 1) {
+              window.location.href = "/lesson";
+            } else {
+              window.location.href = "/home";
+            }
+
+            return response.data;
+          } else {
+            console.log("aldaa");
+          }
         });
     } catch (error) {
       console.log("error");
@@ -42,7 +57,11 @@ class Login extends Component {
         <form onSubmit={this.handleSubmit}>
           <div className="containers">
             <div>
-            <img src={"./ufelogo.png"} class="img-fluid float-left" width="80"/>
+              <img
+                src={"./ufelogo.png"}
+                class="img-fluid float-left"
+                width="80"
+              />
             </div>
             <div className="garchig">НЭВТРЭХ</div>
             <input
@@ -64,7 +83,8 @@ class Login extends Component {
               onChange={this.handleChange}
             />
             <label>
-              <input type="checkbox" name="remember" label="namaig sana" /> Remember Me
+              <input type="checkbox" name="remember" label="namaig sana" />{" "}
+              Remember Me
             </label>
             <button class="btnlogin" type="submit" value="Submit">
               НЭВТРЭХ
@@ -72,9 +92,9 @@ class Login extends Component {
             <span className="psw">
               <a href="#">Forgot Password?</a>
             </span>
-            {/* <button type="button" href="#" className="signupbtn">
+            <Link to="/signup" className="btn btn-light signupbtn ">
               Бүртгүүлэх
-            </button> */}
+            </Link>
           </div>
         </form>
       </div>
