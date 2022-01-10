@@ -1,12 +1,13 @@
 import React, { Component } from "react";
 import axiosInstance from "../axiosApi";
 import { Link, useNavigate } from "react-router-dom";
+import Alert from "react-bootstrap/Alert";
 import "./login-style.css";
 import jwt from "jwt-decode";
 class Login extends Component {
   constructor(props) {
     super(props);
-    this.state = { email: "", password: "" };
+    this.state = { email: "", password: "", message: "", isLoading: "" };
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -75,7 +76,11 @@ class Login extends Component {
               value={this.state.password}
               onChange={this.handleChange}
             />
-
+            {this.state.message && (
+              <Alert className="custom-alert" variant={"danger"}>
+                {this.state.message}
+              </Alert>
+            )}
             <button type="submit" value="Submit" className="btn btn-dark">
               Нэвтрэх
             </button>
