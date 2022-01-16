@@ -2,12 +2,13 @@ import React, { Component } from "react";
 import axiosInstance from "../axiosApi";
 import { Link, useNavigate } from "react-router-dom";
 import Alert from "react-bootstrap/Alert";
+import Spinner from "react-bootstrap/Spinner";
 import "./login-style.css";
 import jwt from "jwt-decode";
 class Login extends Component {
   constructor(props) {
     super(props);
-    this.state = { email: "", password: "", message: "", isLoading: "" };
+    this.state = { email: "", password: "", message: "", isLoading: false };
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -20,6 +21,7 @@ class Login extends Component {
   handleSubmit(event) {
     event.preventDefault();
     try {
+      this.setState({ isLoading: true });
       const response = axiosInstance
         .post("/token/obtain/", {
           email: this.state.email,
@@ -40,12 +42,15 @@ class Login extends Component {
             } else {
               window.location.href = "/home";
             }
-
             return response.data;
           } else {
             console.log("aldaa");
           }
         });
+      this.setState({
+        message: "Нэвтрэх нэр эсвэл нууц үг буруу байна",
+        isLoading: false,
+      });
     } catch (error) {
       console.log("error");
       throw error;
@@ -83,13 +88,34 @@ class Login extends Component {
               value={this.state.password}
               onChange={this.handleChange}
             />
+            {this.state.message && (
+              <Alert variant="danger">{this.state.message}</Alert>
+            )}
             <label>
               <input type="checkbox" name="remember" label="namaig sana" />{" "}
               Remember Me
             </label>
-            <button class="btnlogin" type="submit" value="Submit">
-              НЭВТРЭХ
-            </button>
+            {this.state.isLoading === false ? (
+              <button class="btnlogin" type="submit" value="Submit">
+                НЭВТРЭХ
+              </button>
+            ) : (
+              <button
+                class="btnlogin"
+                type="submit"
+                value="Submit"
+                disabled="true"
+              >
+                НЭВТРЭХ
+                <Spinner
+                  as="span"
+                  animation="border"
+                  size="sm"
+                  role="status"
+                  aria-hidden="true"
+                />
+              </button>
+            )}
             <span className="psw">
               <a href="#">Forgot Password?</a>
             </span>

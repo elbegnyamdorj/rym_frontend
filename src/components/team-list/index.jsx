@@ -1,11 +1,10 @@
-import React, { Component } from "react";
+import React from "react";
 import { Link, useLocation } from "react-router-dom";
 import { useState } from "react";
 import Navbar from "../navbar";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { MAIN_URL } from "../../urls";
-import Select from "react-select";
 import { useEffect } from "react";
 import TeamElement from "../team-element";
 const TeamList = () => {
@@ -18,6 +17,7 @@ const TeamList = () => {
   const [lesson_name] = useState(location.state.lesson_name);
 
   const [student_list, setStudent_list] = useState([]);
+  const [option_student_list, setOption_student_list] = useState([]);
 
   const [team1data, setTeam1data] = useState();
   const [team2data, setTeam2data] = useState();
@@ -40,6 +40,7 @@ const TeamList = () => {
       .then((res) => {
         const data = res.data;
         setStudent_list(data);
+        setOption_student_list(data);
       });
   };
   const onSubmit = () => {
@@ -57,24 +58,20 @@ const TeamList = () => {
         history("/lesson");
       });
   };
-  const onSelected = (selected) => {
-    switch (selected.id) {
-      case 1:
-        setTeam1data(selected);
-        break;
-      case 2:
-        setTeam2data(selected);
-        break;
-      case 3:
-        setTeam3data(selected);
-        break;
-      case 4:
-        setTeam4data(selected);
-        break;
-      case 5:
-        setTeam5data(selected);
-        break;
-    }
+  const onSelected = (team_data) => {
+    var filtered_array = option_student_list.filter(
+      (ar) => !team_data.selected.find((rm) => rm.value === ar.id)
+    );
+
+    setOption_student_list(filtered_array);
+    console.log(filtered_array);
+  };
+  const onRemoved = (removed_student) => {
+    var id = removed_student.value;
+    var student = student_list.find(function (std, index) {
+      if (std.id === id) return true;
+    });
+    setOption_student_list([...option_student_list, student]);
   };
 
   return (
@@ -93,16 +90,16 @@ const TeamList = () => {
               </div>
             </h4>
 
-            {/* {Array.from({ length: num_of_groups }, (_, k) => ( */}
+            {Array.from({ length: num_of_groups }, (_, k) => (
+              <TeamElement
+                dugaar={k + 1}
+                data={option_student_list}
+                onSelected={onSelected}
+                onRemoved={onRemoved}
+              />
+            ))}
 
-            {/* ))} */}
-            <TeamElement
-              dugaar={1}
-              data={student_list}
-              onSelected={onSelected}
-            />
-
-            <TeamElement
+            {/* <TeamElement
               dugaar={2}
               data={student_list}
               onSelected={onSelected}
@@ -124,7 +121,7 @@ const TeamList = () => {
               dugaar={5}
               data={student_list}
               onSelected={onSelected}
-            />
+            /> */}
 
             <div className="container">
               <div className="row">

@@ -14,9 +14,17 @@ export class TeamElement extends Component {
   }
 
   handleChange = (selected) => {
-    this.setState({ selected: selected });
     let data = { id: this.props.dugaar, selected: selected };
-    this.props.onSelected(data);
+
+    if (this.state.selected.length > selected.length) {
+      var filtered_array = this.state.selected.filter(
+        (ar) => !selected.find((rm) => rm.value === ar.value)
+      );
+      this.props.onRemoved(filtered_array[0]);
+    } else {
+      this.props.onSelected(data);
+    }
+    this.setState({ selected: selected });
   };
 
   render() {

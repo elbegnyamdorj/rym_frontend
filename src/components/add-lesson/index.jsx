@@ -19,7 +19,7 @@ const CreateLesson = (props) => {
       })
       .then((res) => {
         const data = res.data;
-        alert("Amjilttai");
+        alert("Хичээлийн групп амжилттай үүслээ");
         history("/lesson/subgroups", {
           state: {
             group_id: data.id,
@@ -30,7 +30,10 @@ const CreateLesson = (props) => {
         });
       });
   };
-
+  const handleStudentListChange = (e) => {
+    setStudent_list(e.target.value);
+    console.log(e.target.value);
+  };
   return (
     <>
       <Navbar />
@@ -43,25 +46,28 @@ const CreateLesson = (props) => {
               <div className="row">
                 <div className="col-sm-6 text-left">
                   <textarea
+                    required
                     className="form-control mb-5"
                     aria-label="With textarea"
                     placeholder="student@ufe.edu.mn , .."
                     style={{ height: "300px" }}
                     value={student_list}
-                    onChange={(e) => setStudent_list(e.target.value)}
+                    onChange={handleStudentListChange}
                   ></textarea>
                 </div>
                 <div className="col-sm-6 d-flex align-items-center flex-column">
                   <input
                     type="text"
                     className="form-control mb-5"
+                    required
                     id="lesson_name"
                     placeholder="Хичээлийн нэр оруулна уу"
                     value={lesson_name}
                     onChange={(e) => setLesson_name(e.target.value)}
                   />
                   <input
-                    type="text"
+                    type="number"
+                    required
                     className="form-control mb-5"
                     id="group_number"
                     placeholder="Группын дугаар оруулна уу"
